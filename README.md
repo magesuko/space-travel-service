@@ -1,24 +1,21 @@
-This is a prototype of an imaginary Gov.UK service for space travel.
+# Space Travel Service
 
-**Step 1: Destination Selection**
-Users choose from two options:
-The Moon or
-Mars
+Space Travel Service takes you to Space :rocket:, for free!
 
-**Step 2: Personal Information**
-Users are prompted to enter:
-First name and last name
+This is a simple service prototype to demonstrate my UI & UX skills by using **govuk-design-system** library components. I've tried to comply with the gov.uk standards mentioned [here](https://prototype-kit.service.gov.uk/docs/tutorials-and-guides).
 
-**Step 3: Address Information**
-Users enter their address details.
+It showcases
+* Nunjucks usage
+* Branching
+* Data passing
+* Route definitions
+* And of course, my understanding of how an intuitive UX design should be.
 
-**Step 4: Review and Change Options**
-Users are given an option to review or change their answers if needed.
+## Give It a Try
+Just click on [this link]([http://aljdlfjadf](https://space-travel-services-4292c2de163c.herokuapp.com)) to see the Heroku instance running this repository. (It's protected with a password which will be provided to the relevant people.)
 
-**Step 5: Final Confirmation**
-Confirmation of the selected travel destination
-Instructions provided to the user
+## Heroku
+The Heroku instance has a pipeline that actively watches this repository and builds/deploys automatically when a change is detected.
 
-
-AREAS NEED IMPROVEMENT: 
-I included JavaScript to validate the input fields for a better user experience, although I wasn't sure if this was part of the task. Ideally, I would use GOV.UK's error message templates for a more consistent approach, but implementing that properly would require more time. I didn't want to submit the assignment late, so I opted for this solution. Thank you for your understanding.
+## Possible Improvements
+* Currently, input field validations are JavaScript-based to keep it simple. It could be replaced with the library component `govukErrorSummary` to be aligned with the standards, but with more effort.
