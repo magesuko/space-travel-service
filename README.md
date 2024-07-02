@@ -2,7 +2,7 @@ This is a prototype of an imaginary Gov.UK service for space travel.
 
 **Step 1: Destination Selection**
 Users choose from two options:
-The Moon
+The Moon or
 Mars
 
 **Step 2: Personal Information**
@@ -16,7 +16,7 @@ Users enter their address details.
 Users are given an option to review or change their answers if needed.
 
 **Step 5: Final Confirmation**
-Confirmation of the selected travel
+Confirmation of the selected travel destination
 Instructions provided to the user
 
 
