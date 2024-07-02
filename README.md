@@ -21,4 +21,4 @@ Instructions provided to the user
 
 
 AREAS NEED IMPROVEMENT: 
-I was not sure if validation of the input fields were a part of this task but I tried to do in anyways for a better experience by using javascript. I know that the better way to do this would be using gov.uk's error template messages but to be able to do it properly I would have to spent more time on the task and I did not want to sumbit this assigment too late. Thank you for your understanding.   
+I included JavaScript to validate the input fields for a better user experience, although I wasn't sure if this was part of the task. Ideally, I would use GOV.UK's error message templates for a more consistent approach, but implementing that properly would require more time. I didn't want to submit the assignment late, so I opted for this solution. Thank you for your understanding.
