@@ -1,0 +1,107 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l"></h1>
+      <form id="addressForm" action="address" method="post" novalidate onsubmit="return validateForm()">
+        {% from "govuk/components/input/macro.njk" import govukInput %}
+        {% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+        {% call govukFieldset({
+          legend: {
+            text: "What is your address?",
+            classes: "govuk-fieldset__legend--l",
+            isPageHeading: true
+          }
+        }) %}
+        {{ govukInput({
+          label: {
+          text: "Address line 1"
+          },
+          id: "address1",
+          name: "address1",
+          value: data["address1"],
+          autocomplete: "address1"
+        }) }}
+        {{ govukInput({
+          label: {
+          text: "Address line 2 (optional)"
+          },
+          id: "address2",
+          name: "address2",
+          value: data["address2"],
+          autocomplete: "address2"
+        }) }}
+        {{ govukInput({
+          label: {
+            text: "Town or city"
+          },
+          classes: "govuk-!-width-two-thirds",
+          id: "town",
+          name: "town",
+          value: data["town"],
+          autocomplete: "town"
+        }) }}
+        {{ govukInput({
+          label: {
+            text: "Postcode"
+          },
+          classes: "govuk-input--width-10",
+          id: "postcode",
+          name: "postcode",
+          value: data["postcode"],
+          autocomplete: "post code"
+        }) }}
+        {% endcall %}
+
+        <div id="error-message" class="govuk-error-message" style="display: none;">
+          <span class="govuk-visually-hidden">Error:</span> Please fill out all required fields.
+        </div>
+
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Save and continue
+        </button>
+        
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function validateForm() {
+      let formValid = true;
+      const requiredFields = ['address1', 'town', 'postcode'];
+
+      requiredFields.forEach(function(fieldId) {
+        const field = document.getElementById(fieldId);
+        if (!field.value.trim()) {
+          formValid = false;
+          field.classList.add('govuk-input--error');
+        } else {
+          field.classList.remove('govuk-input--error');
+        }
+      });
+
+      const errorMessage = document.getElementById('error-message');
+      if (!formValid) {
+        errorMessage.style.display = 'block';
+      } else {
+        errorMessage.style.display = 'none';
+      }
+
+      return formValid;
+    }
+  </script>
+
+{% endblock %}

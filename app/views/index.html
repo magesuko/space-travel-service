@@ -4,17 +4,71 @@
 
 {% block content %}
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
 
-    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+<form id="travelForm" action="index" method="post" onsubmit="return validateForm()">
 
-    <h1 class="govuk-heading-xl">
-      {{ serviceName }}
-    </h1>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <p>Welcome to space travel of the Gov.uk. Where would you like to travel today?<br/>
+        <br/>Please start by selecting your destination first.<br/></p>
+        <br/>
 
-    {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
-  </div>
-</div>
+        {{ govukRadios({
+          name: "travel-destination",
+          fieldset: {
+            legend: {
+              text: "Where do you want to travel?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "The Moon",
+              text: "The Moon",
+              checked: data["travel-destination"] == "The Moon"
+            },
+            {
+              value: "Mars",
+              text: "Mars",
+              checked: data["travel-destination"] == "Mars"
+            }
+          ]
+        }) }}
+
+        <div id="error-message" class="govuk-error-message" style="display: none;">
+          <span class="govuk-visually-hidden">Error:</span> Please select a destination.
+        </div>
+
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Save and continue
+        </button>
+      </div>
+    </div>
+</form>
+
+<script>
+  function validateForm() {
+    const radios = document.getElementsByName('travel-destination');
+    let formValid = false;
+
+    for (let i = 0; i < radios.length; i++) {
+      if (radios[i].checked) {
+        formValid = true;
+        break;
+      }
+    }
+
+    const errorMessage = document.getElementById('error-message');
+    if (!formValid) {
+      errorMessage.style.display = 'block';
+    } else {
+      errorMessage.style.display = 'none';
+    }
+
+    return formValid;
+  }
+</script>
 
 {% endblock %}

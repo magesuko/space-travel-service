@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+
+<form id="travelForm" action="index" method="post" onsubmit="return">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <p>Welcome to space travel of the Gov.uk. Where would you like to travel today?<br/>
+        <br/>Please start by selecting your destination first.<br/></p>
+        <br/>
+
+
+    {{ govukRadios({
+      name: "travel-destination",
+      fieldset: {
+        legend: {
+          text: "Where do you want to travel?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [
+        {
+          value: "The Moon",
+          text: "The Moon"
+          
+        },
+        {
+          value: "Mars",
+          text: "Mars"
+        }
+      ]
+    }) }}
+
+    <button type="submit" class="govuk-button" data-module="govuk-button">
+      Save and continue
+    </button>
+
+  </form>
+
+</div>
+
+
+{% endblock %}

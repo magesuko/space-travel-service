@@ -1,0 +1,98 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  {% from "govuk/components/input/macro.njk" import govukInput %}
+  {% from "govuk/components/button/macro.njk" import govukButton %}
+  {% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+  {% from "govuk/components/input/macro.njk" import govukInput %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form id="nameForm" action="/name" method="post" novalidate>
+        {% call govukFieldset({
+        legend: {
+          text: "What is your name?",
+          classes: "govuk-fieldset__legend--xl",
+          isPageHeading: true
+        }
+      }) %}
+        <div class="govuk-form-group">
+          <div id="firstNameError" class="govuk-error-message" style="display:none;">
+            <span class="govuk-visually-hidden">Error:</span>
+            First name should not be empty
+          </div>
+          {{ govukInput({
+            label: {
+              text: "First name"
+            },
+            id: "first-name",
+            name: "first-name",
+            value: data['first-name']
+          }) }}
+        </div>
+        <div class="govuk-form-group">
+          <div id="lastNameError" class="govuk-error-message" style="display:none;">
+            <span class="govuk-visually-hidden">Error:</span>
+            Last name should not be empty
+          </div>
+          {{ govukInput({
+            label: {
+              text: 'Last name'
+            },
+            id: "last-name",
+            name: "last-name",
+            value: data['last-name']
+          }) }}
+        </div>
+        {% endcall %}
+        {{ govukButton({
+        text: "Save and continue"
+      }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    document.getElementById('nameForm').addEventListener('submit', function(event) {
+      var firstName = document.getElementById('first-name').value.trim();
+      var lastName = document.getElementById('last-name').value.trim();
+      var firstNameError = document.getElementById('firstNameError');
+      var lastNameError = document.getElementById('lastNameError');
+      var formIsValid = true;
+
+      if (!firstName) {
+        firstNameError.style.display = 'block';
+        formIsValid = false;
+      } else {
+        firstNameError.style.display = 'none';
+      }
+
+      if (!lastName) {
+        lastNameError.style.display = 'block';
+        formIsValid = false;
+      } else {
+        lastNameError.style.display = 'none';
+      }
+
+      if (!formIsValid) {
+        event.preventDefault();
+      }
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Check your answers template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <script type="text/javascript" src="auto-store-data.js"></script>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <h1 class="govuk-heading-xl">
+        Check your answers
+      </h1>
+
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Destination:"
+            },
+            value: {
+              text: data["travel-destination"]
+            },
+            actions: {
+              items: [
+                {
+                  href: "index",
+                  text: "Change",
+                  visuallyHiddenText: "Destination"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Name & Surname:"
+            },
+            value: {
+              html: data["first-name"] + " " + data["last-name"]
+            },
+            actions: {
+              items: [
+                {
+                  href: "name",
+                  text: "Change",
+                  visuallyHiddenText: "Name & Surname"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Address:"
+            },
+            value: {
+              html: data["address1"] + "<br/>" + data["address2"] + "<br/>" + data["town"] + "<br/>" + data["postcode"] 
+            },
+            actions: {
+              items: [
+                {
+                  href: "address.html",
+                  text: "Change",
+                  visuallyHiddenText: "Address"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Now send your application
+      </h2>
+      <p id="display-address"></p>
+      <p>
+        By sending this application you are confirming that, you want to travel to the Moon. Have a safe and great travel!
+      </p>
+      <form action="/acceptAndSend" method="post">
+        {{ govukButton({
+          text: "Accept and send"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}
